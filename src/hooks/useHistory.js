@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-export const useHistory = (initialState, size = 5) => {
+export const useHistory = ({ initialState, size = 5, onChange }) => {
   const [history, setHistory] = useState([initialState]);
   const [step, setStep] = useState(0);
 
@@ -23,6 +23,11 @@ export const useHistory = (initialState, size = 5) => {
   });
   const undo = () => setStep(prevStep => prevStep - 1);
   const redo = () => setStep(prevStep => prevStep + 1);
+  const canUndo = () => step !== 0;
+  const canRedo = () => step !== history.length - 1
+  useEffect(() => {
+    onChange({ history, step });
+  }, [history, step]);
 
   return {
     history,
@@ -31,5 +36,7 @@ export const useHistory = (initialState, size = 5) => {
     concat,
     undo,
     redo,
+    canUndo,
+    canRedo,
   }
 };
