@@ -29,7 +29,7 @@ function App() {
       <br/>
       Current: {state.count}
       <br/>
-      Step: {step + 1} / {history.length}
+      Step: {step} / {history.length - 1}
       <br/>
       <button onClick={() => concat({ count: state.count - 1, action: 'decrement' })}>
         Decrement -
@@ -37,13 +37,13 @@ function App() {
       <button onClick={() => concat({ count: state.count + 1, action: 'increment' })}>
         Increment +
       </button>
-      <div>=========HISTORY TRAVEL========</div>
+      <div>========= HISTORY STACK ========</div>
       <button disabled={!canUndo()} onClick={() => undo()}>Undo</button>
       <button disabled={!canRedo()} onClick={() => redo()}>Redo</button>
       <table>
         <thead>
           <tr>
-            <th>Value</th>
+            <th>Count</th>
             <th>Action</th>
           </tr>
         </thead>
